@@ -1,0 +1,29 @@
+﻿@model CRUD_With_CF.Models.Emp
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) { 
+  
+     
+     @Html.HiddenFor(a =>a.EmpNo)
+    
+    @*<div class="editor-label" >*@
+        @Html.LabelFor(a=>(a.EmpName))
+    @*</div>*@
+     @Html.TextBoxFor(a=>(a.EmpName))
+
+    
+    @Html.LabelFor(a=>(a.EmpAdd))
+    @Html.TextBoxFor(a=>(a.EmpAdd))
+
+    
+    @Html.LabelFor(a=>(a.EmpSal))
+    @Html.TextBoxFor(a=>(a.EmpSal))
+
+    <p>
+    <input type="submit" value ="Save">
+        </p>
+}

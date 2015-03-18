@@ -1,0 +1,110 @@
+﻿@model IEnumerable<CRUD_With_CF.Models.Country>
+@{
+    ViewBag.Title = "Country";
+}
+
+@Html.ActionLink("Add Country", "AddCountry", "CRUD")
+
+<script src="~/Scripts/jquery-1.11.1.js"></script>
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+
+        $("#Country").change(function () {
+            $("#State").empty();
+            $("#City").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetStates")',
+
+                dataType: 'json',
+                data: { id: $("#Country").val() },
+
+                success: function (data) {
+                    //var procemessage = "<option value='0'> Please wait...</option>";
+                    //$('#State').html(procemessage).show();
+                    $("#State").empty();
+                    $("#State").append('<option value="-1">select State</option>');
+                    $("#City").append('<option value="-1">select City</option>');
+                    for (var i = 0; i < data.length; i++) {
+                        $("#State").append('<option value="' + data[i].StaCode + '">' + data[i].StaName + '</option>');
+                    }
+                    //for (var i = 0; i < data.length; i++) {
+                    //    $("#State").append('<option>' +data[i].StaName + '</option>');
+                    //}
+                    //$.each(data, function (i, d) {
+                    //    $("#State").append('<option value="' + d.val + '">' + d.Text + '</option>');
+                    //});
+                },
+                error: function (response) {
+                    alert('Error:' + response);
+                }
+            });
+        });
+
+        $("#State").change(function () {
+            var stacod = $("#State").val();
+            alert(stacod);
+            if ('option value!="-1"') {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetCity")',
+                    dataType: 'json',
+                    data: { id: stacod },
+                    success: function (data) {
+                        $("#City").empty();
+                        $("#City").append('<option value="-1">select City</option>');
+                        for (i = 0; i < data.length; i++) {
+                            $("#City").append('<option value="' + data[i].CtyCod + '">' + data[i].CtyName + '</option>');
+                        }
+
+                        //$.each(city, function (i, data) {
+
+                        //    $("#City").append('<option value="' + city.Value + '">' + city.Text + '</option>');
+                        //});
+                    },
+
+                    error: function (response) {
+                        alert('Error:' + response);
+                    }
+                });
+            }
+            else {
+
+            }
+        });
+
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+@using (Html.BeginForm("Country", "CRUD", FormMethod.Post))
+{
+    @Html.DropDownList("Country",
+              new SelectList((System.Collections.IEnumerable)ViewData["Country"], "CntCode", "CntName", "CntCode"))
+
+    <br />
+
+    @Html.DropDownList("State", new SelectList(string.Empty), " Select a State")
+    <br />
+    @Html.DropDownList("City", new SelectList(string.Empty), "Select a city")
+
+
+}

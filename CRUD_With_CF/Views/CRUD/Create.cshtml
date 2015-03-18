@@ -1,0 +1,29 @@
+﻿@model CRUD_With_CF.Models.Emp
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) { 
+  
+    
+    @*<div class="editor-label" >*@
+        @Html.LabelFor(a=>(Model.EmpName))
+    @*</div>*@
+     @Html.TextBoxFor(a=>(Model.EmpName))
+
+    
+    @Html.LabelFor(a=>(Model.EmpAdd))
+    @Html.TextBoxFor(a=>(Model.EmpAdd))
+
+    
+    @Html.LabelFor(a=>(Model.EmpSal))
+    @Html.TextBoxFor(a=>(Model.EmpSal))
+    
+    
+
+    <p>
+    <input type="submit" value ="Create">
+        </p>
+}

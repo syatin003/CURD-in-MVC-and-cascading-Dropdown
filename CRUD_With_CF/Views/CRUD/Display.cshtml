@@ -1,0 +1,33 @@
+﻿@model IList<CRUD_With_CF.Models.Emp>
+
+@{
+    ViewBag.Title = "Display";
+}
+<h2>Display</h2>
+  @Html.ActionLink("Create", "Create")
+@using (Html.BeginForm()) { 
+<table>
+    <tr><th>EmpName</th>
+   <th>EmpAdd</th>
+   <th>EmpSal</th></tr>
+
+    @for (int i = 0; i < Model.Count;i++ )
+    {  
+     @Html.HiddenFor(M => Model[i].EmpNo)
+    <tr>
+    <td>@Html.TextBoxFor(a => Model[i].EmpName)</td>
+    <td>@Html.TextBoxFor(a => Model[i].EmpAdd)</td>
+    <td>@Html.TextBoxFor(a => Model[i].EmpSal)</td>
+    <td>@Html.CheckBoxFor(a=>Model[i].IsActive)</td>
+    <td>
+     @Html.ActionLink("Edit", "Edit",new { id = Model[i].EmpNo })
+    
+    @Html.ActionLink("Delete", "Delete", new { id =Model[i].EmpNo})
+
+    @Html.ActionLink("Details", "GetData", new { id=Model[i].EmpNo})
+        </td></tr>
+   } 
+
+        </table>
+<input type="submit" value="save"/>
+}

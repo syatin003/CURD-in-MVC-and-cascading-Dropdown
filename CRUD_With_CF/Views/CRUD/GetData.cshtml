@@ -1,0 +1,18 @@
+﻿@model CRUD_With_CF.Models.Emp
+@{
+    ViewBag.Title = "GetData";
+}
+
+<h2>GetData</h2>
+
+@using (Html.BeginForm()) { 
+    <table>
+        <tr><td>    @Html.DisplayFor(a=>a.EmpName)</td></tr>
+            <tr><td>@Html.DisplayFor(a=>a.EmpAdd)</td></tr>
+            <tr><td>@Html.DisplayFor(a=>a.EmpSal)</td></tr>
+        <tr><td>@Html.ActionLink("Edit", "Edit", new { id=Model.EmpNo})   </td>
+            <td>@Html.ActionLink("Back To List","Display")</td>
+        </tr>
+</table>
+}
+
